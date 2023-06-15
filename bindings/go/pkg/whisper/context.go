@@ -116,6 +116,11 @@ func (context *context) SetMaxTokensPerSegment(n uint) {
 	context.params.SetMaxTokensPerSegment(int(n))
 }
 
+// Set PrintProgress flag
+func (context *context) SetPrintProgress(b bool) {
+	context.params.SetPrintProgress(b)
+}
+
 // ResetTimings resets the mode timings. Should be called before processing
 func (context *context) ResetTimings() {
 	context.model.ctx.Whisper_reset_timings()

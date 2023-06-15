@@ -46,6 +46,7 @@ type Context interface {
 	SetTokenSumThreshold(float32) // Set timestamp token sum probability threshold
 	SetMaxSegmentLength(uint)     // Set max segment length in characters
 	SetMaxTokensPerSegment(uint)  // Set max tokens per segment (0 = no limit)
+	SetPrintProgress(bool)        // Set print progress flag
 
 	// Process mono audio data and return any errors.
 	// If defined, newly generated segments are passed to the
