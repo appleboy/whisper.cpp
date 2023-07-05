@@ -177,6 +177,7 @@ extern "C" {
 #include <stddef.h>
 #include <stdbool.h>
 
+#define _POSIX_C_SOURCE 199309L
 #define GGML_MAX_DIMS     4
 #define GGML_MAX_NODES    4096
 #define GGML_MAX_PARAMS   16
