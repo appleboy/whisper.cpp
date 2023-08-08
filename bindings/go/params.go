@@ -114,7 +114,8 @@ func (p *Params) SetMaxTokensPerSegment(n int) {
 	p.max_tokens = C.int(n)
 }
 
-// Set max tokens per segment (0 = no limit)
+// SetPrompt sets the initial prompt for the whisper session.
+// The prompt is a string that provides some context for the speech recognition.
 func (p *Params) SetPrompt(v string) {
 	p.initial_prompt = C.CString(v)
 }
