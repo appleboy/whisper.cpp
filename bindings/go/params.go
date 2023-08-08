@@ -173,6 +173,5 @@ func (p *Params) String() string {
 		str += fmt.Sprintf(" initial_prompt=%s", p.initial_prompt)
 	}
 
-
 	return str + ">"
 }
