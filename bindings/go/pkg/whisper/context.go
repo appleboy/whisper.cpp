@@ -145,6 +145,11 @@ func (context *context) SystemInfo() string {
 	)
 }
 
+// SetPrompt
+func (context *context) SetPrompt(v string) {
+	context.params.SetPrompt(v)
+}
+
 // Use mel data at offset_ms to try and auto-detect the spoken language
 // Make sure to call whisper_pcm_to_mel() or whisper_set_mel() first.
 // Returns the probabilities of all languages.
