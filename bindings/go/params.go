@@ -114,6 +114,11 @@ func (p *Params) SetMaxTokensPerSegment(n int) {
 	p.max_tokens = C.int(n)
 }
 
+// Set max tokens per segment (0 = no limit)
+func (p *Params) SetPrompt(v string) {
+	p.initial_prompt = C.CString(v)
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
 
@@ -164,6 +169,10 @@ func (p *Params) String() string {
 	if p.speed_up {
 		str += " speed_up"
 	}
+	if p.initial_prompt != nil {
+		str += fmt.Sprintf(" initial_prompt=%s", p.initial_prompt)
+	}
+
 
 	return str + ">"
 }
