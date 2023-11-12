@@ -81,6 +81,10 @@ func (context *context) SetSpeedup(v bool) {
 	context.params.SetSpeedup(v)
 }
 
+func (context *context) SetSplitOnWord(v bool) {
+	context.params.SetSplitOnWord(v)
+}
+
 // Set number of threads to use
 func (context *context) SetThreads(v uint) {
 	context.params.SetThreads(int(v))
@@ -93,7 +97,7 @@ func (context *context) SetOffset(v time.Duration) {
 
 // Set duration of audio to process
 func (context *context) SetDuration(v time.Duration) {
-	context.params.SetOffset(int(v.Milliseconds()))
+	context.params.SetDuration(int(v.Milliseconds()))
 }
 
 // Set timestamp token probability threshold (~0.01)
@@ -124,6 +128,11 @@ func (context *context) SetMaxTokensPerSegment(n uint) {
 // Set PrintProgress flag
 func (context *context) SetPrintProgress(b bool) {
 	context.params.SetPrintProgress(b)
+}
+
+// Set audio encoder context
+func (context *context) SetAudioCtx(n uint) {
+	context.params.SetAudioCtx(int(n))
 }
 
 // ResetTimings resets the mode timings. Should be called before processing

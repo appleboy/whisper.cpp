@@ -83,7 +83,6 @@ const (
 	SampleRate = C.WHISPER_SAMPLE_RATE                 // Expected sample rate, samples per second
 	SampleBits = uint16(unsafe.Sizeof(C.float(0))) * 8 // Sample size in bits
 	NumFFT     = C.WHISPER_N_FFT
-	NumMEL     = C.WHISPER_N_MEL
 	HopLength  = C.WHISPER_HOP_LENGTH
 	ChunkSize  = C.WHISPER_CHUNK_SIZE
 )
@@ -103,7 +102,7 @@ var (
 func Whisper_init(path string) *Context {
 	cPath := C.CString(path)
 	defer C.free(unsafe.Pointer(cPath))
-	if ctx := C.whisper_init_from_file(cPath); ctx != nil {
+	if ctx := C.whisper_init_from_file_with_params(cPath, C.whisper_context_default_params()); ctx != nil {
 		return (*Context)(ctx)
 	} else {
 		return nil
@@ -270,13 +269,13 @@ func (ctx *Context) Whisper_token_lang(lang_id int) Token {
 }
 
 // Task tokens
-func Whisper_token_translate() Token {
-	return Token(C.whisper_token_translate())
+func (ctx *Context) Whisper_token_translate() Token {
+	return Token(C.whisper_token_translate((*C.struct_whisper_context)(ctx)))
 }
 
 // Task tokens
-func Whisper_token_transcribe() Token {
-	return Token(C.whisper_token_transcribe())
+func (ctx *Context) Whisper_token_transcribe() Token {
+	return Token(C.whisper_token_transcribe((*C.struct_whisper_context)(ctx)))
 }
 
 // Performance information
@@ -336,6 +335,18 @@ func (ctx *Context) Whisper_full_parallel(params Params, samples []float32, proc
 	} else {
 		return ErrConversionFailed
 	}
+}
+
+// Return the id of the autodetected language, returns -1 if not found
+// Added to whisper.cpp in
+// https://github.com/ggerganov/whisper.cpp/commit/a1c1583cc7cd8b75222857afc936f0638c5683d6
+//
+// Examples:
+//
+//	"de" -> 2
+//	"german" -> 2
+func (ctx *Context) Whisper_full_lang_id() int {
+	return int(C.whisper_full_lang_id((*C.struct_whisper_context)(ctx)))
 }
 
 // Number of generated text segments.
@@ -450,4 +461,8 @@ func (t TokenData) T0() int64 {
 
 func (t TokenData) T1() int64 {
 	return int64(t.t1)
+}
+
+func (t TokenData) Id() Token {
+	return Token(t.id)
 }

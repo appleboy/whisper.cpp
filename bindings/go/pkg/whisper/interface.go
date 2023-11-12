@@ -42,6 +42,7 @@ type Context interface {
 	SetDuration(time.Duration)    // Set duration
 	SetThreads(uint)              // Set number of threads to use
 	SetSpeedup(bool)              // Set speedup flag
+	SetSplitOnWord(bool)          // Set split on word flag
 	SetTokenThreshold(float32)    // Set timestamp token probability threshold
 	SetTokenSumThreshold(float32) // Set timestamp token sum probability threshold
 	SetMaxSegmentLength(uint)     // Set max segment length in characters
@@ -49,6 +50,7 @@ type Context interface {
 	SetMaxTokensPerSegment(uint)  // Set max tokens per segment (0 = no limit)
 	SetPrintProgress(bool)        // Set print progress flag
 	SetPrompt(string)             // Set prompt
+	SetAudioCtx(uint)             // Set audio encoder context
 
 	// Process mono audio data and return any errors.
 	// If defined, newly generated segments are passed to the
