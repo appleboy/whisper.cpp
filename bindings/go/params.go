@@ -129,6 +129,17 @@ func (p *Params) SetAudioCtx(n int) {
 	p.audio_ctx = C.int(n)
 }
 
+func (p *Params) SetMaxContext(n int) {
+	p.n_max_text_ctx = C.int(n)
+}
+
+func (p *Params) SetBeamSize(n int) {
+	p.beam_search.beam_size = C.int(n)
+}
+
+func (p *Params) SetEntropyThold(t float32) {
+	p.entropy_thold = C.float(t)
+}
 ///////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
 
