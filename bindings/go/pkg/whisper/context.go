@@ -159,6 +159,21 @@ func (context *context) SetPrompt(v string) {
 	context.params.SetPrompt(v)
 }
 
+// SetMaxContext
+func (context *context) SetMaxContext(n int) {
+	context.params.SetMaxContext(n)
+}
+
+// SetBeamSize
+func (context *context) SetBeamSize(n int) {
+	context.params.SetBeamSize(n)
+}
+
+// SetEntropyThold
+func (context *context) SetEntropyThold(t float32) {
+	context.params.SetEntropyThold(t)
+}
+
 // Use mel data at offset_ms to try and auto-detect the spoken language
 // Make sure to call whisper_pcm_to_mel() or whisper_set_mel() first.
 // Returns the probabilities of all languages.
