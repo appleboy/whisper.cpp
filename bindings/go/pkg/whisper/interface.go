@@ -51,7 +51,9 @@ type Context interface {
 	SetPrintProgress(bool)        // Set print progress flag
 	SetPrompt(string)             // Set prompt
 	SetAudioCtx(uint)             // Set audio encoder context
-
+	SetMaxContext(int)            // Set max context
+	SetBeamSize(int)              // Set BeamSize
+	SetEntropyThold(float32)      // set entropy thold
 	// Process mono audio data and return any errors.
 	// If defined, newly generated segments are passed to the
 	// callback function during processing.
