@@ -9,10 +9,14 @@ import (
 // CGO
 
 /*
-#cgo LDFLAGS: -lwhisper -lm -lstdc++
+#cgo CFLAGS: -std=gnu11 -I. -I./examples -O3 -DNDEBUG -fPIC -D_XOPEN_SOURCE=600 -D_GNU_SOURCE -pthread -msse3 -mssse3 -DGGML_USE_CUBLAS -I/usr/local/cuda/include -I/opt/cuda/include -I/targets/x86_64-linux/include
+#cgo CXXFLAGS: -I. -I./examples -O3 -DNDEBUG -fPIC -D_XOPEN_SOURCE=600 -D_GNU_SOURCE -pthread -msse3 -mssse3 -DGGML_USE_CUBLAS -I/usr/local/cuda/include -I/opt/cuda/include -I/targets/x86_64-linux/include
+#cgo LDFLAGS: -lwhisper -lm -lcuda -lcublas -lculibos -lcudart -lcublasLt -lpthread -ldl -lrt -L/usr/local/cuda/lib64 -L/opt/cuda/lib64 -L/targets/x86_64-linux/lib -lstdc++
 #cgo darwin LDFLAGS: -framework Accelerate
 #include <whisper.h>
 #include <stdlib.h>
+#include </usr/local/cuda-12.0/include/cuda.h>
+#include </usr/local/cuda-12.0/include/cuda_runtime.h>
 
 extern void callNewSegment(void* user_data, int new);
 extern void callProgress(void* user_data, int progress);
